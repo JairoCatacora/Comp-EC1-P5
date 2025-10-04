@@ -13,7 +13,8 @@ string Exp::binopToChar(BinaryOp op) {
         case MUL_OP:   return "*";
         case DIV_OP:   return "/";
         case POW_OP:   return "**";
-        case LE_OP:   return "<";
+        case MENOR_OP:   return "<";
+        case MAYOR_OP:   return ">";
         default:       return "?";
     }
 }
@@ -81,3 +82,10 @@ WhileStm::WhileStm(Exp* e){
 
 IfStm::~IfStm(){}
 WhileStm::~WhileStm(){}
+
+SwitchStm::SwitchStm(Exp* e): e(e) {}
+SwitchStm::~SwitchStm() {}
+
+
+NotExp::NotExp(Exp* e): e(e) {}
+NotExp::~NotExp() {}

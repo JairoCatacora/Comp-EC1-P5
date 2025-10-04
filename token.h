@@ -32,6 +32,18 @@ public:
         ENDIF,
         ENDWHILE,
         ELSE,
+        OR,
+        AND,
+        TRUE,
+        FALSE,
+        MAYOR,
+        MENOR,
+        NOT,
+        SWITCH,
+        CASE,
+        DEFAULT,
+        ENDSWITCH,
+        DOSPUNTOS,
         END      // Fin de entrada
     };
 

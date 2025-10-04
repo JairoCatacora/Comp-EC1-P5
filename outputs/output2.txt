@@ -1,4 +1,16 @@
 === STDOUT ===
+Parseo exitoso
+Codigo:
+y=2
+switch y0 {
+case 10:
+print(10)
+case 20:
+print(10)
+default:
+}
+
+Interprete:
+10
 
 === STDERR ===
-Error al parsear: Error lexico

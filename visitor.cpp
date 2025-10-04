@@ -46,6 +46,14 @@ int WhileStm::accept(Visitor* visitor) {
     return visitor->visit(this);
 }
 
+int SwitchStm::accept(Visitor* visitor) {
+    return visitor->visit(this);
+}
+
+int NotExp::accept(Visitor* visitor) {
+    return visitor->visit(this);
+}
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 int PrintVisitor::visit(BinaryExp* exp) {
@@ -67,6 +75,12 @@ int PrintVisitor::visit(SqrtExp* exp) {
     return 0;
 }
 
+int PrintVisitor::visit(NotExp*  exp) {
+    cout << "not(";
+    exp->e->accept(this);
+    cout << ")";
+    return 0;
+}
 
 void PrintVisitor::imprimir(Program* programa){
     if (programa)
@@ -84,8 +98,11 @@ int EVALVisitor::visit(BinaryExp* exp) {
     int v1 = exp->left->accept(this);
     int v2 = exp->right->accept(this);
     switch (exp->op) {
-        case LE_OP:
+        case MENOR_OP:
             result = v1 < v2;
+            break;
+        case MAYOR_OP:
+            result = v1 > v2;
             break;
         case PLUS_OP:
             result = v1 + v2;
@@ -107,6 +124,12 @@ int EVALVisitor::visit(BinaryExp* exp) {
         case POW_OP:
             result = pow(v1,v2);
             break;
+        case AND_OP:
+            result = v1 && v2;
+            break;
+        case OR_OP:
+            result = v1 || v2;
+            break;
         default:
             cout << "Operador desconocido" << endl;
             result = 0;
@@ -122,6 +145,9 @@ int EVALVisitor::visit(SqrtExp* exp) {
     return floor(sqrt( exp->value->accept(this)));
 }
 
+int EVALVisitor::visit(NotExp* exp) {
+    return ~exp->e->accept(this);
+}
 
 void EVALVisitor::interprete(Program* programa){
     if (programa)
@@ -207,6 +233,28 @@ int EVALVisitor::visit(WhileStm* stm) {
     return 0;
 }
 
+int EVALVisitor::visit(SwitchStm* stm) {
+    int v = stm->e->accept(this);
+    bool found = false;
+    for (auto n : stm->cases) {
+        int caseValue = n->accept(this);
+        if (caseValue == v) {
+            found = true;
+            auto stmList = stm->slist.front();
+            for (auto i : stmList) {
+                i->accept(this);
+            }
+        }
+    }
+    if (!found) {
+        for (auto i : stm->dfcase) {
+            i->accept(this);
+        }
+    }
+    return 0;
+}
+
+
 
 int PrintVisitor::visit(IfStm* stm) {
     cout << "if " ;
@@ -233,5 +281,25 @@ int PrintVisitor::visit(WhileStm* stm) {
         i->accept(this);
     }
     cout << "endwhile" << endl;
+    return 0;
+}
+
+int PrintVisitor::visit(SwitchStm* stm) {
+    cout << "switch ";
+    stm->e->accept(this);
+    for(auto i: stm->slist){
+        cout << "case ";
+        i->accept(this);
+        cout << ":" << endl;
+        
+        for(auto j:i){
+            j->accept(this);
+        }
+    }  
+    cout << "default:" << endl;
+    for (auto i : stm->dfcase) {
+        i->accept(this);
+    }
+    cout << "}" << endl;
     return 0;
 }

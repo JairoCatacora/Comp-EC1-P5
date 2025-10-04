@@ -116,26 +116,67 @@ Stm* Parser::parseStm() {
         match(Token::ENDIF);
         return claseif;
     }
-
+    else if (match(Token::SWITCH)) {
+        e = parseCE();
+        SwitchStm* sw = new SwitchStm(e);
+        while (match(Token::CASE)) {
+            sw->cases.push_back(parseCE());
+            match(Token::DOSPUNTOS);
+            list<Stm*> lista;
+            lista.push_back(parseStm());
+            while (match(Token::SEMICOL)) {
+                lista.push_back(parseStm());
+            }
+            sw->slist.push_back(lista);
+        }
+        if (match(Token::DEFAULT)) {
+            sw->dfcase.push_back(parseStm());
+            while (match(Token::SEMICOL)) {
+                sw->dfcase.push_back(parseStm());
+            }
+        }
+        match(Token::ENDSWITCH);
+        return sw;
+    }
     else{
         throw runtime_error("Error sintáctico");
     }
     return a;
 }
 
-Exp* Parser::parseCE() {
+Exp* Parser::parseAE() {
     Exp* l = parseBE();
-    if (match(Token::LE)) {
-        BinaryOp op = LE_OP;
+    if (match(Token::OR)) {
+        BinaryOp op = OR_OP;
+        Exp* r = parseBE();
+        l = new BinaryExp(l, r, op);
+    }
+    else if (match(Token::AND)) {
+        BinaryOp op = AND_OP;
         Exp* r = parseBE();
         l = new BinaryExp(l, r, op);
     }
     return l;
 }
 
-
 Exp* Parser::parseBE() {
-    Exp* l = parseE();
+    Exp* l = parseCE();
+    if (match(Token::MENOR)) {
+        BinaryOp op = MENOR_OP;
+        Exp* r = parseCE();
+        l = new BinaryExp(l, r, op);
+    }
+    else if (match(Token::MAYOR)) {
+        BinaryOp op = MAYOR_OP;
+        Exp* r = parseCE();
+        l = new BinaryExp(l, r, op);
+    }
+    return l;
+}
+
+
+Exp* Parser::parseCE() {
+    Exp* l = parseDE();
     while (match(Token::PLUS) || match(Token::MINUS)) {
         BinaryOp op;
         if (previous->type == Token::PLUS){
@@ -144,14 +185,14 @@ Exp* Parser::parseBE() {
         else{
             op = MINUS_OP;
         }
-        Exp* r = parseE();
+        Exp* r = parseDE();
         l = new BinaryExp(l, r, op);
     }
     return l;
 }
 
 
-Exp* Parser::parseE() {
+Exp* Parser::parseDE() {
     Exp* l = parseT();
     while (match(Token::MUL) || match(Token::DIV)) {
         BinaryOp op;
@@ -185,7 +226,7 @@ Exp* Parser::parseF() {
     } 
     else if (match(Token::LPAREN))
     {
-        e = parseCE();
+        e = parseAE();
         match(Token::RPAREN);
         return e;
     }
@@ -199,6 +240,18 @@ Exp* Parser::parseF() {
     else if (match(Token::ID))
     {   
         return new IdExp(previous->text);
+    }
+    else if (match(Token::TRUE)) {
+        return new NumberExp(1);
+    } 
+    else if (match(Token::FALSE)) {
+        return new NumberExp(0);
+    }
+    else if (match(Token::NOT)) {
+        match(Token::LPAREN);
+        e = parseAE();
+        match(Token::RPAREN);
+        return new NotExp(e);
     }
     else {
         throw runtime_error("Error sintáctico");

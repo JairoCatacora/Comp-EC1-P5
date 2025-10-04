@@ -1,4 +1,14 @@
 === STDOUT ===
+Parseo exitoso
+Codigo:
+x=1
+switch x0 {
+case 10:
+print(100)
+default:
+}
+
+Interprete:
+100
 
 === STDERR ===
-Error al parsear: Error sintáctico

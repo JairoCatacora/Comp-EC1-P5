@@ -16,8 +16,10 @@ public:
     Parser(Scanner* scanner);       
     Program* parseProgram();             // Punto de entrada: analiza un programa completo
     Stm* parseStm();
-    Exp* parseCE();                   // Regla gramatical P
+    Exp* parseAE();
     Exp* parseBE();
+    Exp* parseCE();                   // Regla gramatical P
+    Exp* parseDE();
     Exp* parseE();                   // Regla gramatical E
     Exp* parseT();                   // Regla gramatical T
     Exp* parseF();                   // Regla gramatical F

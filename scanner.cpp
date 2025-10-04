@@ -62,12 +62,20 @@ Token* Scanner::nextToken() {
         else if (lexema=="endif") return new Token(Token::ENDIF, input, first, current - first);
         else if (lexema=="endwhile") return new Token(Token::ENDWHILE, input, first, current - first);
         else if (lexema=="else") return new Token(Token::ELSE, input, first, current - first);
+        else if (lexema=="and") return new Token(Token::AND, input, first, current - first);
+        else if (lexema=="or") return new Token(Token::OR, input, first, current - first);
+        else if (lexema=="true") return new Token(Token::TRUE, input, first, current - first);
+        else if (lexema=="false") return new Token(Token::FALSE, input, first, current - first);
+        else if (lexema=="not") return new Token(Token::NOT, input, first, current - first);
+        else if (lexema=="switch") return new Token(Token::SWITCH, input, first, current - first);
+        else if (lexema=="case") return new Token(Token::CASE, input, first, current - first);
+        else if (lexema=="default") return new Token(Token::DEFAULT, input, first, current - first);
+        else if (lexema=="endswitch") return new Token(Token::ENDSWITCH, input, first, current - first);
         else return new Token(Token::ID, input, first, current - first);
     }
     // Operadores
-    else if (strchr("+/-*();=<", c)) {
+    else if (strchr("+/-*();=<>:", c)) {
         switch (c) {
-            case '<': token = new Token(Token::LE,  c); break;
             case '+': token = new Token(Token::PLUS,  c); break;
             case '-': token = new Token(Token::MINUS, c); break;
             case '*': 
@@ -85,6 +93,9 @@ Token* Scanner::nextToken() {
             case ')': token = new Token(Token::RPAREN,c); break;
             case '=': token = new Token(Token::ASSIGN,c); break;
             case ';': token = new Token(Token::SEMICOL,c); break;
+            case '>': token = new Token(Token::MAYOR,c); break;
+            case '<': token = new Token(Token::MENOR,c); break;
+            case ':': token = new Token(Token::DOSPUNTOS,c); break;
         }
         current++;
     }

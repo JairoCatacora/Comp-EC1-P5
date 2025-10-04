@@ -1,14 +1,33 @@
 Scanner
 
-TOKEN(ID, "n")
+TOKEN(ID, "z")
 TOKEN(ASSIGN, "=")
-TOKEN(NUM, "4")
+TOKEN(NUM, "3")
 TOKEN(SEMICOL, ";")
-TOKEN(IF, "if")
+TOKEN(SWITCH, "switch")
+TOKEN(ID, "z")
+TOKEN(CASE, "case")
+TOKEN(NUM, "1")
+TOKEN(DOSPUNTOS, ":")
+TOKEN(PRINT, "print")
 TOKEN(LPAREN, "(")
-TOKEN(ID, "n")
-TOKEN(ERR, ">")
-Caracter invalido
+TOKEN(NUM, "111")
+TOKEN(RPAREN, ")")
+TOKEN(CASE, "case")
+TOKEN(NUM, "2")
+TOKEN(DOSPUNTOS, ":")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "222")
+TOKEN(RPAREN, ")")
+TOKEN(DEFAULT, "default")
+TOKEN(DOSPUNTOS, ":")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "0")
+TOKEN(RPAREN, ")")
+TOKEN(ENDSWITCH, "endswitch")
+TOKEN(END)
 
-Scanner no exitoso
+Scanner exitoso
 

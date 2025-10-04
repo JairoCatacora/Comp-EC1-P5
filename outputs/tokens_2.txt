@@ -1,17 +1,27 @@
 Scanner
 
-TOKEN(ID, "a")
+TOKEN(ID, "y")
 TOKEN(ASSIGN, "=")
-TOKEN(NUM, "5")
+TOKEN(NUM, "2")
 TOKEN(SEMICOL, ";")
-TOKEN(ID, "b")
-TOKEN(ASSIGN, "=")
-TOKEN(NUM, "3")
-TOKEN(SEMICOL, ";")
-TOKEN(IF, "if")
-TOKEN(ID, "a")
-TOKEN(ERR, ">")
-Caracter invalido
+TOKEN(SWITCH, "switch")
+TOKEN(ID, "y")
+TOKEN(CASE, "case")
+TOKEN(NUM, "1")
+TOKEN(DOSPUNTOS, ":")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "10")
+TOKEN(RPAREN, ")")
+TOKEN(CASE, "case")
+TOKEN(NUM, "2")
+TOKEN(DOSPUNTOS, ":")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "20")
+TOKEN(RPAREN, ")")
+TOKEN(ENDSWITCH, "endswitch")
+TOKEN(END)
 
-Scanner no exitoso
+Scanner exitoso
 

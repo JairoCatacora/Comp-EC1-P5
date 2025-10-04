@@ -17,7 +17,10 @@ enum BinaryOp {
     MUL_OP, 
     DIV_OP,
     POW_OP,
-    LE_OP
+    MENOR_OP,
+    MAYOR_OP,
+    AND_OP,
+    OR_OP,
 };
 
 // Clase abstracta Exp
@@ -117,6 +120,25 @@ public:
     Program();
     void add(Stm*);
     ~Program();
+    int accept(Visitor* visitor);
+};
+
+class SwitchStm: public Stm {
+public:
+    Exp* e;
+    list<Exp*> cases;
+    list<list<Stm*>> slist;
+    list<Stm*> dfcase;
+    SwitchStm(Exp*);
+    ~SwitchStm();
+    int accept(Visitor* visitor);
+};
+
+class NotExp : public Exp {
+public:
+    Exp* e;
+    NotExp(Exp*);
+    ~NotExp();
     int accept(Visitor* visitor);
 };
 
