@@ -1,0 +1,30 @@
+Scanner
+
+TOKEN(ID, "x")
+TOKEN(ASSIGN, "=")
+TOKEN(ID, "true")
+TOKEN(SEMICOL, ";")
+TOKEN(IF, "if")
+TOKEN(ID, "x")
+TOKEN(THEN, "then")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "1")
+TOKEN(RPAREN, ")")
+TOKEN(ID, "elif")
+TOKEN(ID, "false")
+TOKEN(THEN, "then")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "2")
+TOKEN(RPAREN, ")")
+TOKEN(ELSE, "else")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "0")
+TOKEN(RPAREN, ")")
+TOKEN(ENDIF, "endif")
+TOKEN(END)
+
+Scanner exitoso
+

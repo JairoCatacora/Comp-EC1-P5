@@ -1,0 +1,18 @@
+n = 2;
+m = 5;
+switch n 
+case 1: 
+    print(100)
+case 2: 
+    if not (m < 4) then 
+        switch m 
+        case 5: print(500) 
+        case 6: print(600) 
+        default: print(0) 
+        endswitch
+    else 
+        print(200)
+    endif
+default: 
+    print(999)
+endswitch

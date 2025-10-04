@@ -1,0 +1,17 @@
+Scanner
+
+TOKEN(ID, "a")
+TOKEN(ASSIGN, "=")
+TOKEN(NUM, "5")
+TOKEN(SEMICOL, ";")
+TOKEN(ID, "b")
+TOKEN(ASSIGN, "=")
+TOKEN(NUM, "3")
+TOKEN(SEMICOL, ";")
+TOKEN(IF, "if")
+TOKEN(ID, "a")
+TOKEN(ERR, ">")
+Caracter invalido
+
+Scanner no exitoso
+

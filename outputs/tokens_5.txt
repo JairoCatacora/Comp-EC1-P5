@@ -1,0 +1,37 @@
+Scanner
+
+TOKEN(ID, "a")
+TOKEN(ASSIGN, "=")
+TOKEN(NUM, "2")
+TOKEN(SEMICOL, ";")
+TOKEN(ID, "b")
+TOKEN(ASSIGN, "=")
+TOKEN(NUM, "8")
+TOKEN(SEMICOL, ";")
+TOKEN(IF, "if")
+TOKEN(LPAREN, "(")
+TOKEN(ID, "a")
+TOKEN(MUL, "*")
+TOKEN(NUM, "2")
+TOKEN(LE, "<")
+TOKEN(ID, "b")
+TOKEN(RPAREN, ")")
+TOKEN(ID, "and")
+TOKEN(ID, "true")
+TOKEN(THEN, "then")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(ID, "a")
+TOKEN(PLUS, "+")
+TOKEN(ID, "b")
+TOKEN(RPAREN, ")")
+TOKEN(ID, "elif")
+TOKEN(LPAREN, "(")
+TOKEN(ID, "b")
+TOKEN(DIV, "/")
+TOKEN(NUM, "2")
+TOKEN(ERR, ">")
+Caracter invalido
+
+Scanner no exitoso
+
