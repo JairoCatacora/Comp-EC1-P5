@@ -2,15 +2,11 @@
 Parseo exitoso
 Codigo:
 y=2
-switch y0 {
-case 10:
-print(10)
-case 20:
-print(10)
-default:
-}
+switch y: 
+case 1: print(10)
+case 2: print(20)
 
 Interprete:
-10
+20
 
 === STDERR ===

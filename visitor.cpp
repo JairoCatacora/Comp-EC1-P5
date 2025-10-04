@@ -234,23 +234,26 @@ int EVALVisitor::visit(WhileStm* stm) {
 }
 
 int EVALVisitor::visit(SwitchStm* stm) {
-    int v = stm->e->accept(this);
+    int n = stm->e->accept(this);
     bool found = false;
-    for (auto n : stm->cases) {
-        int caseValue = n->accept(this);
-        if (caseValue == v) {
+    
+    for (auto& c: stm->caseMap) {
+        int v = c.first->accept(this);
+        if (v == n) {
             found = true;
-            auto stmList = stm->slist.front();
-            for (auto i : stmList) {
-                i->accept(this);
+            for (auto& stm : c.second) {
+                stm->accept(this);
             }
+            break;
         }
     }
+    
     if (!found) {
-        for (auto i : stm->dfcase) {
-            i->accept(this);
+        for (auto& stmt : stm->dfcase) {
+            stmt->accept(this);
         }
     }
+    
     return 0;
 }
 
@@ -287,19 +290,23 @@ int PrintVisitor::visit(WhileStm* stm) {
 int PrintVisitor::visit(SwitchStm* stm) {
     cout << "switch ";
     stm->e->accept(this);
-    for(auto i: stm->slist){
+    cout << ": " << endl;
+    
+    for(auto& i : stm->caseMap) {
         cout << "case ";
-        i->accept(this);
-        cout << ":" << endl;
+        i.first->accept(this); 
+        cout << ": ";
         
-        for(auto j:i){
+        for(auto j : i.second) {
             j->accept(this);
         }
-    }  
-    cout << "default:" << endl;
-    for (auto i : stm->dfcase) {
-        i->accept(this);
     }
-    cout << "}" << endl;
+    
+    if (!stm->dfcase.empty()) {
+        cout << "default: ";
+        for (auto i : stm->dfcase) {
+            i->accept(this);
+        }
+    }
     return 0;
 }

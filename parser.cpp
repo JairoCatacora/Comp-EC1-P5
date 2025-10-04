@@ -77,17 +77,17 @@ Stm* Parser::parseStm() {
     if(match(Token::ID)){
         variable = previous->text;
         match(Token::ASSIGN);
-        e = parseCE();
+        e = parseAE();
         return new AssignStm(variable,e);
     }
     else if(match(Token::PRINT)){
         match(Token::LPAREN);
-        e = parseCE();
+        e = parseAE();
         match(Token::RPAREN);
         return new PrintStm(e);
     }
     else if(match(Token::WHILE)){
-        e =  parseCE(); 
+        e =  parseAE(); 
         WhileStm* clasewhile = new WhileStm(e);  
         match(Token::DO);
         clasewhile->slist1.push_back(parseStm());
@@ -99,7 +99,7 @@ Stm* Parser::parseStm() {
     }
 
     else if(match(Token::IF)){
-        e =  parseCE(); 
+        e =  parseAE(); 
         IfStm* claseif = new IfStm(e);  
         match(Token::THEN);
         claseif->slist1.push_back(parseStm());
@@ -117,19 +117,20 @@ Stm* Parser::parseStm() {
         return claseif;
     }
     else if (match(Token::SWITCH)) {
-        e = parseCE();
+        e = parseAE();
         SwitchStm* sw = new SwitchStm(e);
         while (match(Token::CASE)) {
-            sw->cases.push_back(parseCE());
+            Exp* caseExp = parseAE();
             match(Token::DOSPUNTOS);
             list<Stm*> lista;
             lista.push_back(parseStm());
             while (match(Token::SEMICOL)) {
                 lista.push_back(parseStm());
             }
-            sw->slist.push_back(lista);
+            sw->caseMap[caseExp] = lista;
         }
         if (match(Token::DEFAULT)) {
+            match(Token::DOSPUNTOS);
             sw->dfcase.push_back(parseStm());
             while (match(Token::SEMICOL)) {
                 sw->dfcase.push_back(parseStm());

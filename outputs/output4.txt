@@ -1,4 +1,18 @@
 === STDOUT ===
+Parseo exitoso
+Codigo:
+x=0
+while x < 3 do
+switch x: 
+case 0: print(10)
+case 1: print(20)
+default: print(30)
+x=x + 1
+endwhile
+
+Interprete:
+10
+20
+30
 
 === STDERR ===
-Error al parsear: Error sintáctico

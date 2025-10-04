@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <list>
 #include <ostream>
+#include <map>
 
 using namespace std;
 
@@ -126,8 +127,7 @@ public:
 class SwitchStm: public Stm {
 public:
     Exp* e;
-    list<Exp*> cases;
-    list<list<Stm*>> slist;
+    map<Exp*, list<Stm*>> caseMap;
     list<Stm*> dfcase;
     SwitchStm(Exp*);
     ~SwitchStm();
